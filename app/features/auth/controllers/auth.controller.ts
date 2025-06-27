@@ -5,8 +5,8 @@ import { AuthService } from "../service/auth.service";
 // POST / – signup a account
 export async function signup(req: Request, res: Response, next: NextFunction) {
   try {
-    const token = await AuthService.register(req.body);
-    res.status(201).json(token);
+    const user = await AuthService.register(req.body);
+    res.status(201).json(user);
   } catch (err) { next(err); }
 }
 
@@ -14,8 +14,8 @@ export async function signup(req: Request, res: Response, next: NextFunction) {
 export async function signIn(req: Request, res: Response, next: NextFunction) {
   try {
     const {email, password} = req.body;
-    const token = await AuthService.login(email, password);
-    res.json({token})
+    const { user, token } = await AuthService.login(email, password);
+    res.json({user, token})
   } catch (err) { next(err); }
 }
 

@@ -3,7 +3,12 @@ import { User } from '../types/user.type';
 
 const UserSchema = new Schema<User>(
   {
-    name: String,
+    name: {
+      type: String,
+      required: false,
+      unique: true,
+      sparse: true
+    },
     email:  { 
       type: String, 
       required: true, 

@@ -1,4 +1,4 @@
-import { Document, model } from 'mongoose';
+import { Document, model, Types } from 'mongoose';
 
 export interface User extends Document {
   name: string;
@@ -8,5 +8,7 @@ export interface User extends Document {
   status: 'Active' | 'Inactive';
   createdAt: Date;
 }
+
+export type LeanUser = Omit<User, 'password'> & { _id: Types.ObjectId; password: string };
 
 export type UserUpdateInput = Pick<User, 'name' | 'email'>;
